@@ -1,36 +1,33 @@
-package com.example.SpringUnitTesting;
-
+package com.flatiron.spring.flatironspring;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.hamcrest.Matchers.containsString;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(PriceController.class)
+@SpringBootTest
 @AutoConfigureMockMvc
-class PriceControllerIntegrationTest {
-
+public class BitcoinControllerAcceptanceTest {
     @Autowired
     private MockMvc mockMvc;
-    @MockBean
-    private CryptoService bitCoinService;
-
     @WithMockUser(username = "fakeuser", authorities = "admin")
     @Test
-    void price() throws Exception {
-        mockMvc.perform(get("/bitcoin"))
+    void getBitcoinPrice() throws Exception {
+        mockMvc.perform(get("/coingecko"))
                 .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string(containsString("<h1>Hello User</h1>"+"Price of Bitcoin currently: ")));
+                .andExpect(status().isOk());
     }
-
-
+    @WithMockUser(username = "fakeuser", authorities = "admin")
+    @Test
+    void getCryptoPrice() throws Exception {
+        mockMvc.perform(get("/coingecko/ethereum"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
 }

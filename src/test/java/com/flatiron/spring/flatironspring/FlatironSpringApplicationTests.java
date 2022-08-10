@@ -1,10 +1,10 @@
-package com.example.SpringUnitTesting;
+package com.flatiron.spring.flatironspring;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringUnitTestingApplicationTests {
+class FlatironSpringApplicationTests {
 
     @Test
     void contextLoads() {
