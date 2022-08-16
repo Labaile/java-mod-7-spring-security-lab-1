@@ -15,11 +15,11 @@ public class BitcoinController {
     public BitcoinController(BitcoinService bitcoinService) {
         this.bitcoinService = bitcoinService;
     }
-    @GetMapping
+    @GetMapping("/coingecko/price")
     public String getBitcoinPrice(){
         return bitcoinService.getBitcoinPrice();
     }
-    @GetMapping("/{currency}")
+    @GetMapping("/coingecko/{currency}")
     public String getCurrencyPrice(@PathVariable String currency){return bitcoinService.getCurrencyPrice(currency);
     }
 }
